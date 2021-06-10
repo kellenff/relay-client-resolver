@@ -5,9 +5,16 @@
   "author": "Kellen Frodelius-Fujimoto <kellen@kellenfujimoto.com>",
   "license": "MIT",
   "readme": "README.md",
+  "keywords": ["graphql", "relay", "react"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rakenodiax/relay-client-resolver"
+  },
   "scripts": {
+    "typecheck": "tsc --noEmit",
     "build": "microbundle",
-    "dev": "microbundle watch"
+    "dev": "microbundle watch",
+    "prepublishOnly": "yarn run typecheck && yarn run build"
   },
   "source": "src/index.ts",
   "exports": "./dist/index.modern.js",
