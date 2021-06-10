@@ -4,5 +4,18 @@
   "description": "A client-local resolver for Relay Modern",
   "author": "Kellen Frodelius-Fujimoto <kellen@kellenfujimoto.com>",
   "license": "MIT",
-  "private": false
+  "readme": "README.md",
+  "scripts": {
+    "build": "microbundle",
+    "dev": "microbundle watch"
+  },
+  "source": "src/index.ts",
+  "exports": "./dist/index.modern.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
+  "devDependencies": {
+    "microbundle": "^0.13.2",
+    "typescript": "^4.3.2"
+  }
 }
