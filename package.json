@@ -1,0 +1,8 @@
+{
+  "name": "relay-client-resolver",
+  "version": "0.1.0",
+  "description": "A client-local resolver for Relay Modern",
+  "author": "Kellen Frodelius-Fujimoto <kellen@kellenfujimoto.com>",
+  "license": "MIT",
+  "private": false
+}
