@@ -4,6 +4,16 @@ module.exports = {
     "\\.[jt]sx?$": "babel-jest",
   },
   testEnvironment: "jsdom",
+  reporters: [
+    "default",
+    [
+      "jest-junit",
+      {
+        outputDirectory: "reports/",
+        outputFile: "junit.xml",
+      },
+    ],
+  ],
   collectCoverage: true,
   collectCoverageFrom: ["src/**/*.{ts,tsx}"],
   coverageDirectory: "reports/",
