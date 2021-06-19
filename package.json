@@ -19,6 +19,8 @@
     "lint": "eslint . --ext .js,.ts,.json --quiet",
     "build": "microbundle",
     "test": "jest",
+    "test:ci": "jest --ci",
+    "test:coverage": "jest --silent --ci --coverage --coverageReporters='text' --coverageReporters='text-summary'",
     "dev": "microbundle watch",
     "prepublishOnly": "yarn run typecheck && yarn run build",
     "relay": "relay-compiler --src ./src --language typescript --artifactDirectory ./src/__generated__ --schema support/schema.graphql"
