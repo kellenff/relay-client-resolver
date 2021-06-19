@@ -1,0 +1,30 @@
+name: PR Code Checks
+on: pull_request
+jobs:
+  lint:
+    if: ${{ github.event.action != 'closed' }}
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - name: ESLint
+        uses: reviewdog/action-eslint@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
+          level: warning
+          eslint_flags: '--ext ts,tsx .'
+  test:
+    if: ${{ github.event.action != 'closed' }}
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - name: Run tests
+        uses: mattallty/jest-github-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          test-command: yarn test:ci
