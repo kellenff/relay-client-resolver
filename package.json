@@ -20,6 +20,7 @@
     "build": "microbundle",
     "test": "jest",
     "test:ci": "jest --ci",
+    "test:coverage": "jest --silent --ci --coverage --coverageReporters='text' --coverageReporters='text-summary'",
     "dev": "microbundle watch",
     "prepublishOnly": "yarn run typecheck && yarn run build",
     "relay": "relay-compiler --src ./src --language typescript --artifactDirectory ./src/__generated__ --schema support/schema.graphql"
@@ -46,6 +47,7 @@
     "eslint-plugin-prettier": "^3.4.0",
     "husky": "^6.0.0",
     "jest": "^27.0.4",
+    "jest-junit": "^12.2.0",
     "microbundle": "^0.13.2",
     "prettier": "^2.3.1",
     "prettier-eslint": "^12.0.0",

@@ -8,6 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
+      - run: npm i -g yarn
       - name: ESLint
         uses: reviewdog/action-eslint@v1
         with:
@@ -15,6 +16,18 @@ jobs:
           reporter: github-pr-review
           level: warning
           eslint_flags: '--ext ts,tsx .'
+  coverage:
+    if: ${{ github.event.action != 'closed' }}
+    name: coverage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: npm i -g yarn
+      - uses: artiomtr/jest-coverage-report-action@v1.3
+        with:
+          github_token: ${{ secrets.github_token }}
+          test_script: yarn run test:coverage
   test:
     if: ${{ github.event.action != 'closed' }}
     name: test
@@ -22,9 +35,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
-      - name: Run tests
-        uses: mattallty/jest-github-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: npm i -g yarn
+      - run: yarn run test:ci
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        # Run the report even if the previous step failed
+        if: ${{ success() || failure() }}
         with:
-          test-command: yarn test:ci
+          name: test report
+          path: reports/junit.xml
+          reporter: jest-junit
